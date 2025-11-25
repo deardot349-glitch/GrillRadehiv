@@ -1,0 +1,1181 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Кейтеринг у місті Радехів - Ресторан на колісах біля вашого дому</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    
+    <style>
+        /* Custom Fonts */
+        body {
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* Hero Section Animations */
+        .hero-letter {
+            display: inline-block;
+            opacity: 0;
+            transform: translateY(50px);
+        }
+
+        .ember {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: radial-gradient(circle, rgba(255, 102, 0, 0.8) 0%, rgba(255, 102, 0, 0) 70%);
+            border-radius: 50%;
+            box-shadow: 0 0 10px rgba(255, 102, 0, 0.5);
+            animation: float-ember 8s infinite ease-in-out;
+        }
+
+        .ember-1 { left: 10%; animation-delay: 0s; }
+        .ember-2 { left: 30%; animation-delay: 1.5s; }
+        .ember-3 { left: 50%; animation-delay: 3s; }
+        .ember-4 { left: 70%; animation-delay: 4.5s; }
+        .ember-5 { left: 90%; animation-delay: 6s; }
+
+        @keyframes float-ember {
+            0%, 100% {
+                transform: translateY(100vh) scale(0.5);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) scale(1.5);
+                opacity: 0;
+            }
+        }
+
+        .smoke {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 70%);
+            border-radius: 50%;
+            animation: float-smoke 15s infinite ease-in-out;
+        }
+
+        .smoke-1 {
+            left: 20%;
+            bottom: 10%;
+            animation-delay: 0s;
+        }
+
+        .smoke-2 {
+            right: 20%;
+            bottom: 15%;
+            animation-delay: 7s;
+        }
+
+        @keyframes float-smoke {
+            0%, 100% {
+                transform: translateY(0) scale(0.8);
+                opacity: 0.3;
+            }
+            50% {
+                transform: translateY(-50px) scale(1.2);
+                opacity: 0.6;
+            }
+        }
+
+        /* CTA Button Sizzle Effect */
+        .cta-button {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .sizzle-effect {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.3) 0%, transparent 70%);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .cta-button:hover .sizzle-effect {
+            width: 300px;
+            height: 300px;
+            animation: sizzle 0.6s ease-out;
+        }
+
+        @keyframes sizzle {
+            0% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+            }
+        }
+
+        /* What We Do Section */
+        .floating-grill {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        .moving-steak {
+            animation: move-steak 10s infinite ease-in-out;
+        }
+
+        @keyframes move-steak {
+            0%, 100% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+            25% {
+                transform: translate(20px, -20px) rotate(5deg);
+            }
+            50% {
+                transform: translate(0, -40px) rotate(0deg);
+            }
+            75% {
+                transform: translate(-20px, -20px) rotate(-5deg);
+            }
+        }
+
+        .juicy-image {
+            transition: filter 0.3s ease, transform 0.3s ease;
+        }
+
+        .juicy-image:hover {
+            filter: brightness(1.1) saturate(1.3) contrast(1.1);
+            transform: scale(1.05);
+        }
+
+        .feature-item {
+            opacity: 0;
+            transform: translateX(-30px);
+        }
+
+        /* Timeline Styles */
+        .timeline {
+            position: relative;
+            padding: 40px 0;
+        }
+
+        .timeline-line {
+            opacity: 0;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 80px;
+            opacity: 0;
+        }
+
+        .timeline-left {
+            text-align: right;
+            padding-right: 55%;
+        }
+
+        .timeline-right {
+            text-align: left;
+            padding-left: 55%;
+        }
+
+        .timeline-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 3;
+            box-shadow: 0 0 20px rgba(239, 68, 68, 0.5);
+        }
+
+        .timeline-year {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* Calculator Card Animation */
+        .calculator-card {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        /* Smooth Scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #1a1a1a;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(to bottom, #dc2626, #ea580c);
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(to bottom, #ea580c, #f97316);
+        }
+
+        /* Mobile Menu */
+        #mobileMenu {
+            display: none;
+        }
+
+        #mobileMenu.active {
+            display: block;
+        }
+
+        /* Price Counter Animation */
+        .price-counter {
+            font-variant-numeric: tabular-nums;
+        }
+
+        @keyframes count-up {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .price-updating {
+            animation: count-up 0.5s ease-out;
+        }
+
+        /* Menu Card Hover Effects */
+        .menu-card {
+            transition: all 0.3s ease;
+        }
+
+        .menu-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(220, 38, 38, 0.3);
+        }
+
+        .menu-card.selected {
+            border-color: #dc2626 !important;
+            border-width: 3px;
+            box-shadow: 0 0 30px rgba(220, 38, 38, 0.6);
+            background: linear-gradient(135deg, rgba(220, 38, 38, 0.1) 0%, rgba(239, 68, 68, 0.1) 100%);
+        }
+
+        /* Service Checkbox Animation */
+        .service-checkbox {
+            transition: all 0.3s ease;
+        }
+
+        .service-checkbox:checked + label {
+            color: #dc2626;
+            transform: scale(1.05);
+        }
+
+        /* Process Step Animation */
+        .process-step {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        /* Loading Animation */
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.5;
+            }
+        }
+
+        .loading {
+            animation: pulse 2s infinite;
+        }
+
+        /* Mobile Responsive Fixes */
+        @media (max-width: 768px) {
+            /* Hero Section */
+            #hero-title {
+                font-size: 2.5rem !important;
+                line-height: 1.2 !important;
+            }
+            
+            #hero-subtitle {
+                font-size: 1.25rem !important;
+            }
+            
+            #hero-description {
+                font-size: 1rem !important;
+                padding: 0 1rem;
+            }
+            
+            .cta-button {
+                padding: 0.75rem 1.5rem !important;
+                font-size: 1rem !important;
+            }
+            
+            /* What We Do Section */
+            .what-we-do-content h2 {
+                font-size: 2rem !important;
+                text-align: center;
+            }
+            
+            .feature-item {
+                flex-direction: column;
+                text-align: center;
+                margin-bottom: 1.5rem;
+            }
+            
+            .feature-item > div:first-child {
+                margin-bottom: 0.5rem;
+                margin-right: 0;
+            }
+            
+            .floating-grill {
+                margin-top: 2rem;
+            }
+            
+            .moving-steak {
+                display: none; /* Hide on mobile to prevent overlap */
+            }
+            
+            /* Timeline */
+            .timeline-left,
+            .timeline-right {
+                text-align: left;
+                padding-left: 60px;
+                padding-right: 0;
+            }
+            
+            .timeline-line {
+                left: 30px !important;
+            }
+            
+            .timeline-dot {
+                left: 30px !important;
+            }
+            
+            .timeline-content {
+                padding: 1rem !important;
+            }
+            
+            /* Calculator Section */
+            .calculator-card {
+                padding: 1.5rem !important;
+            }
+            
+            /* Footer */
+            .grid.md\\:grid-cols-3 {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            /* Navigation */
+            nav ul {
+                position: fixed;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: rgba(26, 26, 26, 0.98);
+                backdrop-filter: blur(10px);
+                padding: 1rem;
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
+                z-index: 40;
+                transition: all 0.3s ease;
+            }
+            
+            nav ul.hidden {
+                display: none;
+            }
+            
+            nav ul.flex {
+                display: flex;
+            }
+        }
+
+        @media (max-width: 480px) {
+            /* Extra small screens */
+            #hero-title {
+                font-size: 2rem !important;
+            }
+            
+            .container {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+            
+            section {
+                padding-top: 6rem !important;
+                padding-bottom: 4rem !important;
+            }
+            
+            .calculator-card, .form-section {
+                padding: 1rem !important;
+            }
+            
+            .price-display {
+                padding: 1.5rem !important;
+            }
+            
+            .process-steps {
+                grid-template-columns: 1fr !important;
+            }
+        }
+    </style>
+</head>
+<body class="bg-[#1a1a1a] text-white overflow-x-hidden">
+    
+    <!-- Navigation -->
+    <header class="fixed top-0 w-full z-50 bg-[#1a1a1a]/95 backdrop-blur-sm transition-all duration-300" id="header">
+        <nav class="container mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <a href="index.html" class="text-2xl font-black text-white flex items-center">
+                    <i class="fas fa-fire text-red-600 mr-2"></i>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-red-600 to-orange-500">Кейтеринг<span class="text-white">Радехів</span></span>
+                </a>
+                <ul class="hidden md:flex space-x-8">
+                    <li><a href="#hero" class="nav-link hover:text-red-500 transition-colors">Головна</a></li>
+                    <li><a href="#what-we-do" class="nav-link hover:text-red-500 transition-colors">Послуги</a></li>
+                    <li><a href="#calculator" class="nav-link hover:text-red-500 transition-colors">Вартість</a></li>
+                    <li><a href="#history" class="nav-link hover:text-red-500 transition-colors">Історія</a></li>
+                    <li><a href="#footer" class="nav-link hover:text-red-500 transition-colors">Контакти</a></li>
+                </ul>
+                <button class="md:hidden text-white" id="mobileMenuBtn">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="hero" class="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
+        <!-- Video Background Placeholder / Animated Background -->
+        <div class="absolute inset-0 z-0">
+            <div class="absolute inset-0 bg-gradient-to-b from-[#2a1810] via-[#1a1a1a] to-[#1a1a1a]"></div>
+            <div class="absolute inset-0 opacity-20">
+                <div class="ember ember-1"></div>
+                <div class="ember ember-2"></div>
+                <div class="ember ember-3"></div>
+                <div class="ember ember-4"></div>
+                <div class="ember ember-5"></div>
+                <div class="smoke smoke-1"></div>
+                <div class="smoke smoke-2"></div>
+            </div>
+        </div>
+        
+        <div class="container mx-auto px-6 relative z-10 text-center">
+            <h1 id="hero-title" class="text-5xl md:text-7xl lg:text-8xl font-black mb-6 leading-tight">
+                <span class="block hero-letter">Кейтеринг</span>
+                <span class="block hero-letter text-transparent bg-clip-text bg-gradient-to-r from-red-600 via-orange-500 to-yellow-500">Радехів</span>
+            </h1>
+            <p id="hero-subtitle" class="text-xl md:text-2xl lg:text-3xl font-semibold mb-4 text-gray-300">
+                Ресторан на колісах біля вашого дому
+            </p>
+            <p id="hero-description" class="text-lg md:text-xl mb-10 text-gray-400 max-w-3xl mx-auto leading-relaxed">
+                Наша шеф-кухня та професійний гриль приїжджають до вас, щоб створити незабутній гастрономічний досвід. 
+                Соковите м'ясо, аромат диму та ідеальне обслуговування.
+            </p>
+            <button id="cta-button" class="cta-button px-10 py-5 text-xl font-bold rounded-full bg-gradient-to-r from-red-600 to-orange-500 hover:from-red-700 hover:to-orange-600 transform hover:scale-105 transition-all duration-300 shadow-2xl shadow-red-900/50 relative overflow-hidden group">
+                <span class="relative z-10">Замовити Дзвінок</span>
+                <div class="absolute inset-0 bg-gradient-to-r from-orange-500 to-red-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <div class="sizzle-effect"></div>
+            </button>
+        </div>
+        
+        <!-- Scroll Indicator -->
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 z-10 animate-bounce">
+            <i class="fas fa-chevron-down text-2xl text-gray-400"></i>
+        </div>
+    </section>
+
+    <!-- What We Do Section -->
+    <section id="what-we-do" class="py-20 md:py-32 bg-gradient-to-b from-[#1a1a1a] to-[#2a1810] relative overflow-hidden">
+        <div class="container mx-auto px-6">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <!-- Text Content -->
+                <div class="what-we-do-content">
+                    <h2 class="text-4xl md:text-5xl font-black mb-6 text-transparent bg-clip-text bg-gradient-to-r from-red-600 to-orange-500">
+                        Майстерня смаку за вашою адресою
+                    </h2>
+                    <p class="text-lg md:text-xl mb-6 text-gray-300 leading-relaxed">
+                        Ми — це повністю укомплектована кухня на колесах із професійним грилем Josper та досвідченим шеф-кухарем.
+                    </p>
+                    <p class="text-lg md:text-xl mb-8 text-gray-300 leading-relaxed">
+                        Оберіть пакет послуг, а ми привеземо всі інгредієнти, приготуємо та обслуговуємо ваших гостей прямо на вашому подвір'ї, терасі чи в парку.
+                    </p>
+                    
+                    <div class="space-y-4">
+                        <div class="flex items-start space-x-4 feature-item">
+                            <div class="flex-shrink-0 w-12 h-12 rounded-full bg-gradient-to-r from-red-600 to-orange-500 flex items-center justify-center">
+                                <i class="fas fa-fire text-white"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold mb-1">Професійний гриль Josper та обладнання</h3>
+                                <p class="text-gray-400">Найкраще обладнання для приготування ідеального м'яса</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start space-x-4 feature-item">
+                            <div class="flex-shrink-0 w-12 h-12 rounded-full bg-gradient-to-r from-red-600 to-orange-500 flex items-center justify-center">
+                                <i class="fas fa-users text-white"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold mb-1">Шеф-кухар та його команда</h3>
+                                <p class="text-gray-400">Досвідчені професіонали з пристрастю до грилю</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start space-x-4 feature-item">
+                            <div class="flex-shrink-0 w-12 h-12 rounded-full bg-gradient-to-r from-red-600 to-orange-500 flex items-center justify-center">
+                                <i class="fas fa-drumstick-bite text-white"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold mb-1">Преміум інгредієнти</h3>
+                                <p class="text-gray-400">М'ясо, овочі, соуси найвищої якості</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start space-x-4 feature-item">
+                            <div class="flex-shrink-0 w-12 h-12 rounded-full bg-gradient-to-r from-red-600 to-orange-500 flex items-center justify-center">
+                                <i class="fas fa-broom text-white"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold mb-1">Обслуговування та прибирання</h3>
+                                <p class="text-gray-400">Ми дбаємо про все, щоб ви просто насолоджувались</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Visual Element -->
+                <div class="what-we-do-visual relative">
+                    <div class="floating-grill relative">
+                        <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?q=80&w=1200&auto=format&fit=crop" alt="Grill" class="rounded-2xl shadow-2xl transform hover:scale-105 transition-transform duration-500 juicy-image w-full">
+                        <div class="absolute -top-10 -right-10 w-24 h-24 moving-steak hidden md:block">
+                            <img src="https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=800&auto=format&fit=crop" alt="Steak" class="rounded-full w-full h-full object-cover shadow-xl">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Price Calculator Entry Section -->
+    <section id="calculator" class="py-20 md:py-32 bg-gradient-to-b from-[#2a1810] to-[#1a1a1a] relative">
+        <div class="container mx-auto px-6">
+            <div class="max-w-2xl mx-auto">
+                <h2 class="text-4xl md:text-5xl font-black mb-4 text-center text-transparent bg-clip-text bg-gradient-to-r from-red-600 to-orange-500">
+                    Скільки це коштує?
+                </h2>
+                <p class="text-xl mb-10 text-center text-gray-400">
+                    Вкажіть основні деталі та отримайте миттєвий розрахунок та детальну пропозицію
+                </p>
+                
+                <div class="bg-[#2a2a2a] rounded-2xl p-8 shadow-2xl calculator-card">
+                    <form id="calculator-form" class="space-y-6">
+                        <div>
+                            <label class="block text-lg font-semibold mb-3">Кількість гостей</label>
+                            <select name="guests" class="w-full px-4 py-3 bg-[#1a1a1a] border-2 border-[#444] rounded-lg text-white focus:border-red-600 focus:outline-none transition-colors">
+                                <option value="10-20">10-20 гостей</option>
+                                <option value="21-40">21-40 гостей</option>
+                                <option value="41-60">41-60 гостей</option>
+                                <option value="60+">60+ гостей</option>
+                            </select>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-lg font-semibold mb-3">Тип події</label>
+                            <select name="event-type" class="w-full px-4 py-3 bg-[#1a1a1a] border-2 border-[#444] rounded-lg text-white focus:border-red-600 focus:outline-none transition-colors">
+                                <option value="birthday">День Народження</option>
+                                <option value="corporate">Корпоратив</option>
+                                <option value="wedding">Весілля</option>
+                                <option value="family">Сімейне свято</option>
+                            </select>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-lg font-semibold mb-3">Бажана дата</label>
+                            <input type="date" name="date" class="w-full px-4 py-3 bg-[#1a1a1a] border-2 border-[#444] rounded-lg text-white focus:border-red-600 focus:outline-none transition-colors" required>
+                        </div>
+                        
+                        <button type="button" id="calculate-price-btn" class="w-full px-8 py-4 text-xl font-bold rounded-full bg-gradient-to-r from-red-600 to-orange-500 hover:from-red-700 hover:to-orange-600 transform hover:scale-105 transition-all duration-300 shadow-2xl shadow-red-900/50">
+                            Дізнатися вартість
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- History Section -->
+    <section id="history" class="py-20 md:py-32 bg-gradient-to-b from-[#1a1a1a] to-[#2a1810] relative overflow-hidden">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl md:text-5xl font-black mb-16 text-center text-transparent bg-clip-text bg-gradient-to-r from-red-600 to-orange-500">
+                Наша Історія
+            </h2>
+            
+            <div class="max-w-6xl mx-auto">
+                <div class="timeline relative">
+                    <!-- Timeline Line -->
+                    <div class="absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-gradient-to-b from-red-600 via-orange-500 to-yellow-500 timeline-line"></div>
+                    
+                    <!-- Timeline Items -->
+                    <div class="timeline-item timeline-left" data-year="2020">
+                        <div class="timeline-content bg-[#2a2a2a] rounded-2xl p-6 shadow-xl">
+                            <div class="timeline-year text-3xl font-black text-red-600 mb-3">2020</div>
+                            <h3 class="text-2xl font-bold mb-3">Народження ідеї</h3>
+                            <p class="text-gray-400">Після невдалого пікніка з друзями з'явилась ідея — чому б не привезти професійний гриль прямо до клієнта?</p>
+                        </div>
+                        <div class="timeline-dot bg-gradient-to-r from-red-600 to-orange-500"></div>
+                    </div>
+                    
+                    <div class="timeline-item timeline-right" data-year="2021">
+                        <div class="timeline-content bg-[#2a2a2a] rounded-2xl p-6 shadow-xl">
+                            <div class="timeline-year text-3xl font-black text-red-600 mb-3">2021</div>
+                            <h3 class="text-2xl font-bold mb-3">Запуск першого Кейтеринг Радехів</h3>
+                            <p class="text-gray-400">Старенький фургон, але велика мрія. Перші клієнти та перші навчання.</p>
+                        </div>
+                        <div class="timeline-dot bg-gradient-to-r from-red-600 to-orange-500"></div>
+                    </div>
+                    
+                    <div class="timeline-item timeline-left" data-year="2022">
+                        <div class="timeline-content bg-[#2a2a2a] rounded-2xl p-6 shadow-xl">
+                            <div class="timeline-year text-3xl font-black text-red-600 mb-3">2022</div>
+                            <h3 class="text-2xl font-bold mb-3">Понад 100 задоволених клієнтів</h3>
+                            <p class="text-gray-400">Оновлення автопарку та розширення команди. Впровадження професійного гриля Josper.</p>
+                        </div>
+                        <div class="timeline-dot bg-gradient-to-r from-red-600 to-orange-500"></div>
+                    </div>
+                    
+                    <div class="timeline-item timeline-right" data-year="2023">
+                        <div class="timeline-content bg-[#2a2a2a] rounded-2xl p-6 shadow-xl">
+                            <div class="timeline-year text-3xl font-black text-red-600 mb-3">2023</div>
+                            <h3 class="text-2xl font-bold mb-3">Найпопулярніший вибір для корпоративів</h3>
+                            <p class="text-gray-400">Стали найпопулярнішим вибором для корпоративів у Києві. Рекордна кількість замовлень.</p>
+                        </div>
+                        <div class="timeline-dot bg-gradient-to-r from-red-600 to-orange-500"></div>
+                    </div>
+                    
+                    <div class="timeline-item timeline-left" data-year="2024">
+                        <div class="timeline-content bg-[#2a2a2a] rounded-2xl p-6 shadow-xl">
+                            <div class="timeline-year text-3xl font-black text-red-600 mb-3">2024</div>
+                            <h3 class="text-2xl font-bold mb-3">Гриль-майстерні для дітей</h3>
+                            <p class="text-gray-400">Запуск нової послуги — гриль-майстерні для дітей. Навчання та розваги одночасно!</p>
+                        </div>
+                        <div class="timeline-dot bg-gradient-to-r from-red-600 to-orange-500"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="footer" class="bg-[#1a1a1a] border-t border-[#333] py-12">
+        <div class="container mx-auto px-6">
+            <div class="grid md:grid-cols-3 gap-8 mb-8">
+                <div>
+                    <a href="index.html" class="text-2xl font-black text-white flex items-center mb-4">
+                        <i class="fas fa-fire text-red-600 mr-2"></i>
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-red-600 to-orange-500">Grill<span class="text-white">Radehiv</span></span>
+                    </a>
+                    <p class="text-gray-400">Ресторан на колісах, що привозить майстерність та смак прямо до вас.</p>
+                </div>
+                
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Контакти</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><i class="fas fa-phone mr-2 text-red-600"></i> <a href="tel:+380991234567" class="hover:text-red-600 transition-colors">+38 (099) 123-45-67</a></li>
+                        <li><i class="fas fa-envelope mr-2 text-red-600"></i> <a href="mailto:grill@radehiv.ua" class="hover:text-red-600 transition-colors">grill@radehiv.ua</a></li>
+                        <li><i class="fas fa-map-marker-alt mr-2 text-red-600"></i> м. Київ, обслуговуємо всю область</li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Соціальні мережі</h3>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-12 h-12 rounded-full bg-[#2a2a2a] flex items-center justify-center hover:bg-red-600 transition-colors">
+                            <i class="fab fa-instagram text-xl"></i>
+                        </a>
+                        <a href="#" class="w-12 h-12 rounded-full bg-[#2a2a2a] flex items-center justify-center hover:bg-red-600 transition-colors">
+                            <i class="fab fa-facebook text-xl"></i>
+                        </a>
+                        <a href="#" class="w-12 h-12 rounded-full bg-[#2a2a2a] flex items-center justify-center hover:bg-red-600 transition-colors">
+                            <i class="fab fa-telegram text-xl"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-[#333] pt-8 text-center text-gray-400">
+                <p>&copy; 2024 GrillRadehiv. Усі права захищені.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // Register GSAP ScrollTrigger plugin
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Set default animation properties
+        gsap.defaults({
+            ease: "power3.out",
+            duration: 1
+        });
+
+        // Header Scroll Effect
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('header');
+            if (window.scrollY > 100) {
+                header.classList.add('shadow-2xl');
+                header.style.backgroundColor = 'rgba(26, 26, 26, 0.98)';
+            } else {
+                header.classList.remove('shadow-2xl');
+                header.style.backgroundColor = 'rgba(26, 26, 26, 0.95)';
+            }
+        });
+
+        // Hero Section Animations
+        function initHeroAnimations() {
+            const heroTitle = document.getElementById('hero-title');
+            const heroSubtitle = document.getElementById('hero-subtitle');
+            const heroDescription = document.getElementById('hero-description');
+            const ctaButton = document.getElementById('cta-button');
+
+            // Animate hero title letters with sizzle effect
+            const letters = heroTitle.querySelectorAll('.hero-letter');
+            letters.forEach((letter, index) => {
+                gsap.fromTo(letter, 
+                    {
+                        opacity: 0,
+                        y: 100,
+                        rotationX: -90,
+                        transformOrigin: "center bottom"
+                    },
+                    {
+                        opacity: 1,
+                        y: 0,
+                        rotationX: 0,
+                        duration: 1.2,
+                        delay: index * 0.1,
+                        ease: "back.out(1.7)"
+                    }
+                );
+            });
+
+            // Animate subtitle
+            gsap.fromTo(heroSubtitle,
+                {
+                    opacity: 0,
+                    y: 30
+                },
+                {
+                    opacity: 1,
+                    y: 0,
+                    duration: 1,
+                    delay: 0.6
+                }
+            );
+
+            // Animate description
+            gsap.fromTo(heroDescription,
+                {
+                    opacity: 0,
+                    y: 30
+                },
+                {
+                    opacity: 1,
+                    y: 0,
+                    duration: 1,
+                    delay: 0.9
+                }
+            );
+
+            // Animate CTA button with sizzle effect
+            gsap.fromTo(ctaButton,
+                {
+                    opacity: 0,
+                    scale: 0.8
+                },
+                {
+                    opacity: 1,
+                    scale: 1,
+                    duration: 0.8,
+                    delay: 1.2,
+                    ease: "elastic.out(1, 0.5)"
+                }
+            );
+
+            // Continuous glow effect on button
+            gsap.to(ctaButton, {
+                boxShadow: "0 0 30px rgba(220, 38, 38, 0.6)",
+                duration: 2,
+                repeat: -1,
+                yoyo: true,
+                ease: "sine.inOut",
+                delay: 1.5
+            });
+        }
+
+        // What We Do Section Animations
+        function initWhatWeDoAnimations() {
+            const content = document.querySelector('.what-we-do-content');
+            const visual = document.querySelector('.what-we-do-visual');
+            const features = document.querySelectorAll('.feature-item');
+
+            // Fade in content from left
+            gsap.fromTo(content,
+                {
+                    opacity: 0,
+                    x: -100
+                },
+                {
+                    opacity: 1,
+                    x: 0,
+                    duration: 1.2,
+                    scrollTrigger: {
+                        trigger: content,
+                        start: "top 80%",
+                        end: "bottom 20%",
+                        toggleActions: "play none none reverse"
+                    }
+                }
+            );
+
+            // Fade in visual from right
+            gsap.fromTo(visual,
+                {
+                    opacity: 0,
+                    x: 100,
+                    scale: 0.9
+                },
+                {
+                    opacity: 1,
+                    x: 0,
+                    scale: 1,
+                    duration: 1.2,
+                    scrollTrigger: {
+                        trigger: visual,
+                        start: "top 80%",
+                        end: "bottom 20%",
+                        toggleActions: "play none none reverse"
+                    }
+                }
+            );
+
+            // Animate feature items sequentially
+            features.forEach((item, index) => {
+                gsap.fromTo(item,
+                    {
+                        opacity: 0,
+                        x: -30
+                    },
+                    {
+                        opacity: 1,
+                        x: 0,
+                        duration: 0.8,
+                        delay: index * 0.15,
+                        scrollTrigger: {
+                            trigger: item,
+                            start: "top 85%",
+                            toggleActions: "play none none reverse"
+                        }
+                    }
+                );
+            });
+
+            // Continuous float animation for grill image
+            gsap.to('.floating-grill', {
+                y: -20,
+                duration: 3,
+                repeat: -1,
+                yoyo: true,
+                ease: "sine.inOut"
+            });
+
+            // Moving steak animation - floating with rotation
+            if (document.querySelector('.moving-steak')) {
+                gsap.to('.moving-steak', {
+                    y: -40,
+                    x: 20,
+                    rotation: 5,
+                    duration: 4,
+                    repeat: -1,
+                    yoyo: true,
+                    ease: "sine.inOut"
+                });
+            }
+        }
+
+        // Calculator Section Animation
+        function initCalculatorAnimations() {
+            const calculatorCard = document.querySelector('.calculator-card');
+
+            gsap.fromTo(calculatorCard,
+                {
+                    opacity: 0,
+                    y: 50,
+                    scale: 0.95
+                },
+                {
+                    opacity: 1,
+                    y: 0,
+                    scale: 1,
+                    duration: 1,
+                    scrollTrigger: {
+                        trigger: calculatorCard,
+                        start: "top 80%",
+                        toggleActions: "play none none reverse"
+                    },
+                    ease: "back.out(1.2)"
+                }
+            );
+        }
+
+        // Timeline Animations
+        function initTimelineAnimations() {
+            const timelineItems = document.querySelectorAll('.timeline-item');
+            const timelineLine = document.querySelector('.timeline-line');
+
+            // Animate timeline line
+            gsap.fromTo(timelineLine,
+                {
+                    scaleY: 0,
+                    opacity: 0
+                },
+                {
+                    scaleY: 1,
+                    opacity: 1,
+                    duration: 2,
+                    scrollTrigger: {
+                        trigger: '.timeline',
+                        start: "top 60%",
+                        end: "bottom 20%",
+                        scrub: 1
+                    },
+                    transformOrigin: "top"
+                }
+            );
+
+            // Animate timeline items
+            timelineItems.forEach((item, index) => {
+                gsap.fromTo(item,
+                    {
+                        opacity: 0,
+                        x: index % 2 === 0 ? -100 : 100,
+                        scale: 0.8
+                    },
+                    {
+                        opacity: 1,
+                        x: 0,
+                        scale: 1,
+                        duration: 1,
+                        scrollTrigger: {
+                            trigger: item,
+                            start: "top 75%",
+                            toggleActions: "play none none reverse"
+                        },
+                        ease: "back.out(1.2)"
+                    }
+                );
+
+                // Animate timeline dot
+                const dot = item.querySelector('.timeline-dot');
+                gsap.fromTo(dot,
+                    {
+                        scale: 0,
+                        opacity: 0
+                    },
+                    {
+                        scale: 1,
+                        opacity: 1,
+                        duration: 0.5,
+                        delay: 0.3,
+                        scrollTrigger: {
+                            trigger: item,
+                            start: "top 75%",
+                            toggleActions: "play none none reverse"
+                        },
+                        ease: "elastic.out(1, 0.5)"
+                    }
+                );
+            });
+        }
+
+        // Mobile Menu Toggle
+        function initMobileMenu() {
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const nav = document.querySelector('nav ul');
+
+            if (mobileMenuBtn) {
+                mobileMenuBtn.addEventListener('click', () => {
+                    nav.classList.toggle('hidden');
+                    nav.classList.toggle('flex');
+                    nav.classList.toggle('flex-col');
+                    nav.classList.toggle('absolute');
+                    nav.classList.toggle('top-full');
+                    nav.classList.toggle('left-0');
+                    nav.classList.toggle('w-full');
+                    nav.classList.toggle('bg-[#1a1a1a]');
+                    nav.classList.toggle('p-4');
+                    nav.classList.toggle('space-y-4');
+                });
+            }
+        }
+
+        // Parallax Effect for Hero Section
+        function initParallax() {
+            gsap.to('.ember', {
+                y: -window.innerHeight - 100,
+                duration: 8,
+                repeat: -1,
+                ease: "none",
+                stagger: {
+                    amount: 8,
+                    from: "random"
+                }
+            });
+        }
+
+        // Initialize all animations when DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            // Only run hero animations if on index page
+            if (document.getElementById('hero-title')) {
+                initHeroAnimations();
+            }
+
+            // Only run what-we-do animations if section exists
+            if (document.querySelector('.what-we-do-content')) {
+                initWhatWeDoAnimations();
+            }
+
+            // Only run calculator animations if section exists
+            if (document.querySelector('.calculator-card')) {
+                initCalculatorAnimations();
+            }
+
+            // Only run timeline animations if timeline exists
+            if (document.querySelector('.timeline')) {
+                initTimelineAnimations();
+            }
+
+            initMobileMenu();
+
+            // Only run parallax if embers exist
+            if (document.querySelector('.ember')) {
+                initParallax();
+            }
+
+            // Smooth scroll for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    const target = document.querySelector(targetId);
+                    if (target) {
+                        // Use native smooth scroll as fallback
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                        // If ScrollToPlugin is available, use it
+                        if (typeof ScrollToPlugin !== 'undefined') {
+                            gsap.to(window, {
+                                duration: 1,
+                                scrollTo: {
+                                    y: target,
+                                    offsetY: 80
+                                },
+                                ease: "power3.inOut"
+                            });
+                        }
+                    }
+                });
+            });
+        });
+
+        // Intersection Observer for additional scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-in');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all sections
+        document.querySelectorAll('section').forEach(section => {
+            observer.observe(section);
+        });
+
+        // Handle calculator form submission
+        document.addEventListener('DOMContentLoaded', () => {
+            const calculateBtn = document.getElementById('calculate-price-btn');
+            const form = document.getElementById('calculator-form');
+            
+            if (calculateBtn && form) {
+                calculateBtn.addEventListener('click', () => {
+                    const formData = new FormData(form);
+                    const params = new URLSearchParams();
+                    
+                    params.append('guests', formData.get('guests') || '10-20');
+                    params.append('event-type', formData.get('event-type') || 'birthday');
+                    const date = formData.get('date');
+                    if (date) {
+                        params.append('date', date);
+                    }
+                    
+                    window.location.href = `calculator.html?${params.toString()}`;
+                });
+            }
+        });
+    </script>
+</body>
+</html>
